@@ -11,7 +11,7 @@ const remarkIncludeKustomization = require('./src/remark/include-kustomization')
 const remarkBlueprintsAddon = require('./src/remark/blueprints-addon');
 
 const rootDir = path.dirname(require.resolve('./package.json'));
-const manifestsDir = `${rootDir}/../environment/workspace/modules`;
+const manifestsDir = `${rootDir}/../manifests`;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
