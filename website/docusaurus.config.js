@@ -11,6 +11,8 @@ const remarkIncludeKustomization = require('./src/remark/include-kustomization')
 const remarkBlueprintsAddon = require('./src/remark/blueprints-addon');
 const remarkParameters = require('./src/remark/parameters');
 
+require('dotenv').config({ path: '.kustomize-env' })
+
 const rootDir = path.dirname(require.resolve('./package.json'));
 const manifestsDir = `${rootDir}/../manifests`;
 

@@ -26,6 +26,9 @@ flux_checksum='268b8d9a2fa5b0c9e462b551eaefdadb9e03370eb53061a88a2a9ac40e95e8e4'
 terraform_version='1.4.1'
 terraform_checksum='9e9f3e6752168dea8ecb3643ea9c18c65d5a52acc06c22453ebc4e3fc2d34421'
 
+argocd_version='2.6.3'
+argocd_checksum='3fc1b6ebccbfb53a52f2b5f5003396d089568ca531bc66f798feed51acc13ba3'
+
 download_and_verify () {
   url=$1
   checksum=$2
@@ -100,6 +103,11 @@ unzip -o terraform.zip
 chmod +x terraform
 mv ./terraform /usr/local/bin
 rm -rf terraform.zip
+
+# argocd
+download_and_verify "https://github.com/argoproj/argo-cd/releases/download/v${argocd_version}/argocd-linux-amd64" "$argocd_checksum" "argocd-linux-amd64"
+chmod +x ./argocd-linux-amd64
+mv ./argocd-linux-amd64 /usr/local/bin/argocd
 
 if [ ! -z "$REPOSITORY_REF" ]; then
   cat << EOT > /usr/local/bin/reset-environment
