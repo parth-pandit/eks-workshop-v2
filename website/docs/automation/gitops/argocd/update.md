@@ -14,7 +14,7 @@ Normally, you should update the configuration files in the Git repository and co
 Update replicas of the `catalog` application in the `kustomization` file to 3:
 
 ```file
-automation/gitops/argocd/update-app/kustomization.yaml
+modules/automation/gitops/argocd/update-app/kustomization.yaml
 ```
 
 Update Argo CD app to reflect the latest changes:
