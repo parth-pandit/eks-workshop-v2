@@ -24,7 +24,7 @@ $ kubectl create ns argocd-demo
 Create an Argo CD application:
 
 ```bash
-$ argocd app create argocd-demo --repo https://github.com/aws-samples/eks-workshop-v2.git --path environment/workspace/modules/automation/gitops/argocd --dest-server https://kubernetes.default.svc --dest-namespace argocd-demo
+$ argocd app create argocd-demo --repo https://github.com/VAR::MANIFESTS_OWNER/VAR::MANIFESTS_REPOSITORY.git --path manifests/modules/automation/gitops/argocd --revision VAR::MANIFESTS_REF --dest-server https://kubernetes.default.svc --dest-namespace argocd-demo
  application 'argocd-demo' created
 ```
 
@@ -33,10 +33,10 @@ Verify that the application has been created:
 ```bash
 $ argocd app list
 NAME                CLUSTER                         NAMESPACE    PROJECT  STATUS     HEALTH   SYNCPOLICY  CONDITIONS  REPO                                                PATH                                                    TARGET
-argocd/argocd-demo  https://kubernetes.default.svc  argocd-demo  default  OutOfSync  Healthy  <none>      <none>      https://github.com/aws-samples/eks-workshop-v2.git  environment/workspace/modules/automation/gitops/argocd
+argocd/argocd-demo  https://kubernetes.default.svc  argocd-demo  default  OutOfSync  Healthy  <none>      <none>      https://github.com/aws-samples/eks-workshop-v2.git  manifests/modules/automation/gitops/argocd
 ```
 
-Alternatively, you can also intereact with Argo CD objects in the cluster using the `kubectl` command:
+Alternatively, you can also interact with Argo CD objects in the cluster using the `kubectl` command:
 
 ```bash
 $ kubectl get apps -n argocd

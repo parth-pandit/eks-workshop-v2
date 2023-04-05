@@ -42,7 +42,7 @@ Deployment/checkout
 To make the change, run the following command to modify the **checkout** deployment in your cluster:
 
 ```bash
-$ kubectl apply -k /manifests/modules/fundamentals/affinity/checkout/
+$ kubectl apply -k /eks-workshop/manifests/modules/fundamentals/affinity/checkout/
 namespace/checkout unchanged
 serviceaccount/checkout unchanged
 configmap/checkout unchanged
@@ -82,7 +82,7 @@ Deployment/checkout-redis
 Apply it with the following command:
 
 ```bash
-$ kubectl apply -k /manifests/modules/fundamentals/affinity/checkout-redis/
+$ kubectl apply -k /eks-workshop/manifests/modules/fundamentals/affinity/checkout-redis/
 namespace/checkout unchanged
 serviceaccount/checkout unchanged
 configmap/checkout unchanged
