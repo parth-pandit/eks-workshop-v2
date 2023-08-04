@@ -27,14 +27,14 @@ $ kubectl get pod -n checkout -l app.kubernetes.io/component=service -o json | j
 Looks like our Pod is missing the label `fargate=yes`, so lets fix that by updating the deployment for that service so the Pod spec includes the label needed for the profile to schedule it on Fargate.
 
 ```kustomization
-fundamentals/fargate/enabling/deployment.yaml
+modules/fundamentals/fargate/enabling/deployment.yaml
 Deployment/checkout
 ```
 
 Apply the kustomization to the cluster:
 
 ```bash timeout=220 hook=enabling
-$ kubectl apply -k /workspace/modules/fundamentals/fargate/enabling
+$ kubectl apply -k ~/environment/eks-workshop/modules/fundamentals/fargate/enabling
 [...]
 $ kubectl rollout status -n checkout deployment/checkout --timeout=200s
 ```
@@ -51,8 +51,8 @@ Events:
   ----     ------           ----   ----               -------
   Warning  LoggingDisabled  10m    fargate-scheduler  Disabled logging because aws-logging configmap was not found. configmap "aws-logging" not found
   Normal   Scheduled        9m48s  fargate-scheduler  Successfully assigned checkout/checkout-78fbb666b-fftl5 to fargate-ip-10-42-11-96.us-west-2.compute.internal
-  Normal   Pulling          9m48s  kubelet            Pulling image "public.ecr.aws/aws-containers/retail-store-sample-checkout:latest"
-  Normal   Pulled           9m5s   kubelet            Successfully pulled image "public.ecr.aws/aws-containers/retail-store-sample-checkout:latest" in 43.258137629s
+  Normal   Pulling          9m48s  kubelet            Pulling image "public.ecr.aws/aws-containers/retail-store-sample-checkout:0.4.0"
+  Normal   Pulled           9m5s   kubelet            Successfully pulled image "public.ecr.aws/aws-containers/retail-store-sample-checkout:0.4.0" in 43.258137629s
   Normal   Created          9m5s   kubelet            Created container checkout
   Normal   Started          9m4s   kubelet            Started container checkout
 ```

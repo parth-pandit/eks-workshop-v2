@@ -7,13 +7,18 @@ sidebar_custom_props: {"module": true}
 :::tip Before you start
 Prepare your environment for this section:
 
-```bash timeout=300 wait=30
-$ reset-environment 
+```bash timeout=600 wait=30
+$ prepare-environment fundamentals/mng
 ```
+
+This will make the following changes to your lab environment:
+- Create an additional managed node group in the Amazon EKS cluster
+
+You can view the Terraform that applies these changes [here](https://github.com/VAR::MANIFESTS_OWNER/VAR::MANIFESTS_REPOSITORY/tree/VAR::MANIFESTS_REF/manifests/modules/fundamentals/mng/.workshop/terraform).
 
 :::
 
-In the Getting started lab, we deployed our sample application to EKS and saw the running Pods. But are these Pods running?
+In the Getting started lab, we deployed our sample application to EKS and saw the running Pods. But where are these Pods running?
 
 An EKS cluster contains one or more EC2 nodes that Pods are scheduled on. EKS nodes run in your AWS account and connect to the control plane of your cluster through the cluster API server endpoint. You deploy one or more nodes into a node group. A node group is one or more EC2 instances that are deployed in an EC2 Auto Scaling group.
 
