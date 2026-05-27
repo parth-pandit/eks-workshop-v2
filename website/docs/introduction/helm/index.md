@@ -196,11 +196,11 @@ replicaCount: 2
 
 image:
   repository: public.ecr.aws/aws-containers/retail-store-sample-catalog
-  tag: "0.4.0"
+  tag: "1.2.1"
   pullPolicy: IfNotPresent
 
 serviceAccount:
-  create: true
+  create: false
 
 service:
   type: ClusterIP
@@ -224,9 +224,22 @@ resources:
     cpu: 256m
     memory: 512Mi
 
+envFrom:
+  - configMapRef:
+      name: catalog
+  - secretRef:
+      name: catalog-db
+
 nameOverride: "catalog"
 fullnameOverride: "catalog"
 EOF
+```
+
+We also need to update the deployment template to support our `envFrom` values and correct the container port, since the default template doesn't include these:
+
+```bash
+$ sed -i 's/containerPort: {{ .Values.service.port }}/containerPort: {{ .Values.service.targetPort }}/' retail-catalog/templates/deployment.yaml
+$ sed -i '/{{- with .Values.resources }}/i\          {{- with .Values.envFrom }}\n          envFrom:\n            {{- toYaml . | nindent 12 }}\n          {{- end }}' retail-catalog/templates/deployment.yaml
 ```
 
 ### Installing the Chart
@@ -234,12 +247,13 @@ EOF
 First, let's remove the existing catalog deployment that was installed with Kustomize:
 
 ```bash
-$ kubectl delete namespace catalog
+$ kubectl delete deployment -n catalog catalog
+$ kubectl delete service -n catalog catalog
 ```
 
 Now let's install our catalog service using the Helm chart:
 
-```bash
+```bash hook=install-catalog
 $ helm install catalog ./retail-catalog --namespace catalog --create-namespace
 ```
 
